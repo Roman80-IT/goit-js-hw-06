@@ -6,11 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task 3</title>
     <link rel="stylesheet" href="css/common.css" />
+    <style>
+      .flex-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .flex-gallery li {
+        margin: 10px;
+      }
+
+      .flex-gallery img {
+        width: 100px;
+        height: 68px;
+        object-fit: cover;
+      }
+    </style>
   </head>
   <body>
     <p><a href="index.html">Go back</a></p>
 
-    <ul class="gallery"></ul>
+    <ul class="gallery flex-gallery"></ul>
 
     <script src="js/task-03.js" type="module"></script>
   </body>
