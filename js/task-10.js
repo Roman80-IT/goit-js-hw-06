@@ -16,3 +16,11 @@ function getRandomHexColor() {
 const createButton = document.querySelector("[data-create]");
 const destroyButton = document.querySelector("[data-destroy]");
 const boxesContainer = document.getElementById("boxes");
+
+createButton.addEventListener("click", createBoxes);
+destroyButton.addEventListener("click", destroyBoxes);
+
+function createBoxes() {
+  const amountInput = document.querySelector("input");
+  const amount = Number(amountInput.value);
+}
