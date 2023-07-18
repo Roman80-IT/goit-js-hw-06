@@ -13,14 +13,46 @@ function getRandomHexColor() {
 
 //* Створи функцію destroyBoxes(), яка очищає вміст div#boxes, у такий спосіб видаляючи всі створені елементи
 
-const createButton = document.querySelector("[data-create]");
-const destroyButton = document.querySelector("[data-destroy]");
+// const createEl = document.querySelector("[data-create]");
+// const destroyEl = document.querySelector("[data-destroy]");
+// const boxesContainer = document.getElementById("boxes");
+
+// createEl.addEventListener("click", createBoxes);
+// destroyEl.addEventListener("click", destroyBoxes);
+
+// function createBoxes() {
+//   const amountInput = document.querySelector("input");
+//   const amount = Number(amountInput.value);
+// }
+
+//!----------------------------        ВАРІАНТ 2        -----------------------------------
+
+const inputEl = document.querySelector("input");
+const createEl = document.querySelector("button[data-create]");
+const destroyEl = document.querySelector("button[data-destroy]");
 const boxesContainer = document.getElementById("boxes");
+const controlsEl = document.getElementById("controls");
 
-createButton.addEventListener("click", createBoxes);
-destroyButton.addEventListener("click", destroyBoxes);
+createEl.addEventListener("click", onClickCreate);
+destroyEl.addEventListener("click", onClickDestroy);
 
-function createBoxes() {
-  const amountInput = document.querySelector("input");
-  const amount = Number(amountInput.value);
+function onClickCreate() {
+  createBoxes(inputEl.value);
+}
+
+function createBoxes(amount) {
+  let size = 30;
+  let arr = [];
+  for (let i = 0; i < amount; i += 1) {
+    const controlsElchild = document.createElement("div");
+    controlsElchild.style.cssText = `background-color: ${getRandomHexColor()}; width: ${size}px; height: ${size}px; `;
+    size += 10;
+    arr.push(controlsElchild);
+  }
+  boxesContainer.append(...arr);
+}
+
+function onClickDestroy() {
+  inputEl.value = "";
+  boxesContainer.innerHTML = "";
 }
