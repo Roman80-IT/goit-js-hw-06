@@ -5,9 +5,11 @@
 const fontSizeControl = document.querySelector("#font-size-control");
 const text = document.querySelector("#text");
 
-fontSizeControl.addEventListener("input", function () {
+fontSizeControl.addEventListener("input", sizeCtrl);
+
+function sizeCtrl() {
   const fontSize = fontSizeControl.value;
   //   console.log(fontSize);
   //* інлайн - стиль:
   text.style.fontSize = `${fontSize}px`;
-});
+}
