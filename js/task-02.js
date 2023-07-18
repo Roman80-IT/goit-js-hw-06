@@ -25,7 +25,7 @@ ingredients.forEach((i) => {
   li.classList.add("item"); //? +class
   // console.log(li);
   fragment.appendChild(li); //? 'appendChild()' - метод для додавання одного елемента до іншого, 'append()' є методом для додавання елементів до DOM
-  console.log(fragment);
+  // console.log(fragment);
 });
 
 ul.append(fragment);
