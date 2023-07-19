@@ -2,14 +2,30 @@
 //* і змінює інлайн-стиль 'span#text', оновлюючи властивість 'font-size'
 //* В результаті, перетягуючи повзунок, буде змінюватися розмір тексту.
 
-const fontSizeControl = document.querySelector("#font-size-control");
+const input = document.querySelector("#font-size-control");
 const text = document.querySelector("#text");
 
-fontSizeControl.addEventListener("input", sizeCtrl);
+input.addEventListener("input", sizeCtrl);
 
+//! -----------------     ВАРІАНТ 1     --------------------
 function sizeCtrl() {
-  const fontSize = fontSizeControl.value;
-  //   console.log(fontSize);
-  //* інлайн - стиль:
-  text.style.fontSize = `${fontSize}px`;
+  const sizeText = input.value;
+  //   console.log(sizeText);
+  text.style.fontSize = `${sizeText}px`; //* інлайн - стиль:
 }
+
+//! Викликаємо ф-цію один раз після завантаження сторінки
+//* Щоб забезпечити синхронізацію розміру тексту при завантаженні сторінки і після зміни значення ползунка,
+//* потрібно викликати ф-цію sizeCtrl один раз після того, як сторінка завантажується, і ще раз відразу після того, як змінюється значення ползунка.
+sizeCtrl();
+
+//! ------------------     ВАРІАНТ 2     --------------------
+// function sizeCtrl(evt) {
+//   let sizeText = evt.currentTarget.value; //* отримали значення, яке встановлене на елементі, що викликав подію
+//   text.style.fontSize = `${sizeText}px`; //* зміна розміру тексту в елементі span#text відповідно до значення повзунка
+// }
+
+// //! Викликаємо ф-цію після завантаження сторінки
+// sizeCtrl({ currentTarget: input }); //* передає об'єкт з подією currentTarget, який містить елемент input.
+//*                 Це дозволяє викликати ф-цію зі значенням ползунка за замовчуванням (16px у прикладі), щоб встановити початковий розмір тексту при завантаженні сторінки.
+//*                 Після цього ф-ція sizeCtrl буде автоматично викликатися при зміні значення ползунка, що дозволить змінювати розмір тексту синхронно зі зміною значення ползунка.

@@ -24,7 +24,7 @@ const input = document.getElementById("validation-input");
 // input.classList.toggle
 // const input = document.querySelector("#validation-input");
 
-//! ------------     ВАРІАНТ 2      ------------------
+//! ------------     ВАРІАНТ 2  (toggle)   ------------------
 // input.addEventListener("blur", function () {
 //   const needLength = parseInt(input.getAttribute("data-length"));
 //   const inputLength = input.value.length;
@@ -33,6 +33,22 @@ const input = document.getElementById("validation-input");
 //   input.classList.toggle("valid", isValidLength);
 //   input.classList.toggle("invalid", !isValidLength);
 // });
+
+//! ------------     ВАРІАНТ 2А     ------------------
+// input.addEventListener("blur", validationInput);
+// const validLength = Number(input.getAttribute("data-length"));
+
+// function validationInput(evt) {
+//   if (evt.currentTarget.value.trim().length === validLength) {
+//     toggleClasses("invalid", "valid");
+//   } else {
+//     toggleClasses("valid", "invalid");
+//   }
+// }
+// function toggleClasses(firstEl, secondEl) {
+//   input.classList.remove(firstEl);
+//   input.classList.add(secondEl);
+// }
 
 //! ------------     ВАРІАНТ 3      ------------------
 input.addEventListener("blur", colorF);
