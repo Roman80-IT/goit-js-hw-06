@@ -13,20 +13,36 @@ function getRandomHexColor() {
 
 //* Створи функцію destroyBoxes(), яка очищає вміст div#boxes, у такий спосіб видаляючи всі створені елементи
 
-const inputEl = document.querySelector("input");
-const createEl = document.querySelector("[data-create]");
-const destroyEl = document.querySelector("[data-destroy]");
+const createButton = document.querySelector("[data-create]");
+const destroyButton = document.querySelector("[data-destroy]");
 const boxesContainer = document.getElementById("boxes");
+const amountInput = document.querySelector("input");
 
-createEl.addEventListener("click", createBoxes);
-destroyEl.addEventListener("click", destroyBoxes);
+createButton.addEventListener("click", createBoxes);
+destroyButton.addEventListener("click", destroyBoxes);
 
 function createBoxes() {
-  const amount = Number(inputEl.value);
+  const amount = Number(amountInput.value);
+  const min = Number(amountInput.min);
+  const max = Number(amountInput.max);
+  const step = Number(amountInput.step);
+
+  if (
+    isNaN(amount) ||
+    amount < min ||
+    amount > max ||
+    (amount - min) % step !== 0
+  ) {
+    alert(
+      `Please enter a valid number between ${min} and ${max}, with a step of ${step}.`
+    );
+    return;
+  }
+
   const boxes = [];
   let size = 30;
 
-  for (let i = 0; i < amount; i++) {
+  for (let i = 0; i < amount; i += step) {
     const box = document.createElement("div");
     box.style.width = `${size}px`;
     box.style.height = `${size}px`;
@@ -40,9 +56,10 @@ function createBoxes() {
 
 function destroyBoxes() {
   boxesContainer.innerHTML = "";
+  amountInput.value = "";
 }
 
-//!----------------------------        ВАРІАНТ 2        -----------------------------------
+//!----------------------------        ВАРІАНТ проба2        -----------------------------------
 
 // const inputEl = document.querySelector("input");
 // const createEl = document.querySelector("button[data-create]");
