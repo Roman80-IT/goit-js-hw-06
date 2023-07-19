@@ -3,8 +3,11 @@
 //*   - Якщо введена правильна к-сть символів, то border інпуту стає зеленим, якщо неправильна кількість - червоним.
 //*   - Для додавання стилів використовуй CSS-класи valid і invalid, які ми вже додали у вихідні файли завдання.
 
-// const input = document.getElementById("validation-input");
+//? Подія 'blur' відбувається, коли елемент втрачає фокус (користувач клікає поза інпутом або переходить до іншого елементу)
 
+const input = document.getElementById("validation-input");
+
+//! ------------     ВАРІАНТ 1      ------------------
 // input.addEventListener("blur", colorF);
 // function () {
 //   const needLength = parseInt(input.getAttribute("data-length"));
@@ -22,9 +25,6 @@
 // const input = document.querySelector("#validation-input");
 
 //! ------------     ВАРІАНТ 2      ------------------
-
-// const input = document.getElementById("validation-input");
-
 // input.addEventListener("blur", function () {
 //   const needLength = parseInt(input.getAttribute("data-length"));
 //   const inputLength = input.value.length;
@@ -35,14 +35,15 @@
 // });
 
 //! ------------     ВАРІАНТ 3      ------------------
-
-const input = document.getElementById("validation-input");
-
 input.addEventListener("blur", colorF);
 function colorF(evt) {
-  evt.target.classList.remove("valid", "invalid");
+  evt.target.classList.remove("valid", "invalid"); //* спочатку очистимо класи valid та invalid з елемента input (прибираємо попередні стилі)
   //* input.currentTarget.classList.remove("invalid");
-  input.value.length === Number(evt.currentTarget.dataset.length)
+  //* Порівнюємо к-сть символів в інпуті з data-length. Якщо збігаються - інпут вважається валідним, і додається клас valid
+  input.value.trim().length === Number(evt.currentTarget.dataset.length)
     ? input.classList.add("valid")
     : input.classList.add("invalid");
 }
+
+//*  Властивість 'dataset.length' надає доступ до значення атрибута 'data-length' елемента 'input', який вказує, скільки символів має бути введено в інпут (для даних обробників).
+//*  використовуємо currentTarget, а не target - в обробнику події blur, currentTarget вказує на елемент, на якому був зареєстрований обробник події (в нашому випадку - елемент input).
