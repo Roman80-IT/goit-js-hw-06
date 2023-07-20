@@ -20,21 +20,45 @@
 //   console.log(`Elements: ${elements}`);
 // });
 
-//!-------------------------      ВАРІАНТ 2    ('children')     -----------------------------------
+//!-------------------------      ВАРІАНТ 2    ('children' forEach     )     -----------------------------------
 
-const list = document.getElementById("categories");
-const items = list.children; //* Звертаємося до дочірніх елементів (живої колекції) контейнера "list" (іd "categories") - отримуємо всі елементи з класом "item"
+//* Отримуємо елемент ul#categories
+const categoriesList = document.getElementById("categories");
 
-console.log(`Number of categories: ${items.length}`); // *к-сть дочірніх елементів (з класом "item") - к-сть категорій
+//* Отримуємо всі елементи li.item
+const categoriesItems = categoriesList.children;
 
-for (const item of items) {
-  const title = item.firstElementChild.textContent; //* текстовий контент першого дочірнього вузла-елементу (<h2>) в елементі "item" (категорії) - заголовок кожної категорії
-  const elements = countElements(item.lastElementChild); //* Викликаємо ф-цію `countElements`, передаючи останній дочірній вузол-елемент (<ul>) в елементі "item" (підраховує к-сть дочірніх елементів <li>)
-  //! const elements = item.length;  Живі колекції (напр. 'item.children'), також мають властивість '.length' -  показує к-сть елементів у колекції, але вони не мають індексів, як у масивів. Тому, якщо ми хочемо підрахувати кількість дочірніх елементів <li> в елементі <ul>, ми повинні ітерувати через колекцію за допомогою циклу або методів, як ми зробили це в функції countElements.
+//* Виводимо кількість категорій
+console.log("Number of categories:", categoriesItems.length);
 
-  console.log(`Category: ${title}`);
-  console.log(`Elements: ${elements}`);
-}
+//* Проходимося по кожному елементу li.item та виводимо інформацію
+categoriesItems.forEach((item) => {
+  //* Отримуємо текст заголовку (тег <h2>)
+  const categoryTitle = item.firstElementChild.textContent;
+
+  //* Отримуємо всі елементи li у поточній категорії (поточному li.item)
+  const categoryElements = [...item.lastElementChild.children];
+
+  //* Виводимо інформацію про категорію і кількість елементів
+  console.log("Category:", categoryTitle);
+  console.log("Elements:", categoryElements.length);
+});
+
+//////////////////////////////////////////////////////////////
+
+// const list = document.getElementById("categories");
+// const items = list.children; //* Звертаємося до дочірніх елементів (живої колекції) контейнера "list" (іd "categories") - отримуємо всі елементи з класом "item"
+
+// console.log(`Number of categories: ${items.length}`); // *к-сть дочірніх елементів (з класом "item") - к-сть категорій
+
+// for (const item of items) {
+//   const title = item.firstElementChild.textContent; //* текстовий контент першого дочірнього вузла-елементу (<h2>) в елементі "item" (категорії) - заголовок кожної категорії
+//   const elements = countElements(item.lastElementChild); //* Викликаємо ф-цію `countElements`, передаючи останній дочірній вузол-елемент (<ul>) в елементі "item" (підраховує к-сть дочірніх елементів <li>)
+//   //! const elements = item.length;  Живі колекції (напр. 'item.children'), також мають властивість '.length' -  показує к-сть елементів у колекції, але вони не мають індексів, як у масивів. Тому, якщо ми хочемо підрахувати кількість дочірніх елементів <li> в елементі <ul>, ми повинні ітерувати через колекцію за допомогою циклу або методів, як ми зробили це в функції countElements.
+
+//   console.log(`Category: ${title}`);
+//   console.log(`Elements: ${elements}`);
+// }
 //!-------------------------      ВАРІАНТ 2А    ('while')     -----------------------------------
 // //* ф-ція приймає елемент '<ul>' в якості параметра
 // function countElements(ulElement) {
@@ -51,7 +75,7 @@ for (const item of items) {
 // }
 
 //!-------------------------      ВАРІАНТ 2Б    ('while')     -----------------------------------
-function countElements(ulElement) {
-  // const liElements = ulElement.children; //* передамо це відразу в return
-  return ulElement.children.length; //* count;
-}
+// function countElements(ulElement) {
+//   // const liElements = ulElement.children; //* передамо це відразу в return
+//   return ulElement.children.length; //* count;
+// }
